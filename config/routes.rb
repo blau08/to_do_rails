@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resources :lists do
-    resources :tasks
-  end
-  resources :task do
-    resources :subtask
+
+    resources :tasks do
+      member do
+        post :completed
+      end
+    end
   end
 end

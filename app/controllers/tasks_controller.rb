@@ -36,9 +36,14 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to list_path(@task.list)
   end
-
+  def completed
+    @list = List.find(params[:list_id])
+    @task = Task.find(params[:id])
+    @task.update_attribute(:completed, true)
+    redirect_to list_path(@task.list)
+  end
 private
   def task_params
-    params.require(:task).permit(:description)
+    params.require(:task).permit(:description, :completed)
   end
 end
